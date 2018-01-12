@@ -31,7 +31,10 @@ public class Destructor_Destroy : MonoBehaviour {
         if(layersToDestroyOnExit == (layersToDestroyOnExit | (1<< collision.gameObject.layer))){
             // TODO posible llamada a evento. event BlockPlatform
             // TODO temporal
-            collision.gameObject.GetComponent<Platform_SpriteChange>().ChangeToBlockedSprite();
+            if(collision.gameObject.GetComponent<Platform_SpriteChange>() != null)
+            {
+                collision.gameObject.GetComponent<Platform_SpriteChange>().ChangeToBlockedSprite();
+            }
             collision.gameObject.GetComponent<Platform_Drag>().BlockPlatform();
         }
     }
