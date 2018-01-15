@@ -27,5 +27,11 @@ public class Player_Score : MonoBehaviour {
     {
         scorePlatformText.text = "Pl: " + scorePlatform;
     }
+
+    public void DecreaseScore()
+    {
+        scorePlatform--;
+        UpdateUI();
+    }
 	#endregion
 }

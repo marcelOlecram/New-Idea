@@ -8,6 +8,7 @@ public class Destructor_Movement : MonoBehaviour {
     // public
     public float speed;
     public float acceleration;
+    public float deacceleration;
     // private
     private string playerTag = "Player";
     private Transform myTransform;
@@ -44,9 +45,14 @@ public class Destructor_Movement : MonoBehaviour {
         myTransform.position += direction * speed * Time.deltaTime;
     }
 
-    public void ChangeSpeed()
+    public void IncreaseSpeed()
     {
         speed += acceleration;
+    }
+
+    public void DecreaseSpeed()
+    {
+        speed -= deacceleration;
     }
 	#endregion
 }

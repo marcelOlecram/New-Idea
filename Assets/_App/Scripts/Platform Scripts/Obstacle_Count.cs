@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Platform_Count : MonoBehaviour {
+public class Obstacle_Count : MonoBehaviour {
 
     #region Variables
     // public
@@ -12,13 +12,13 @@ public class Platform_Count : MonoBehaviour {
     private string destructorTag = "Destructor";
     private GameObject player;
     private GameObject destructor;
-	#endregion
-	
-	#region Unity Methods
-	// Use this for initialization
-	private void Start () {
+    #endregion
+
+    #region Unity Methods
+    // Use this for initialization
+    private void Start () {
         SetInitialReferences();
-	}
+    }
 	
 	// Update is called once per frame
 	private void Update () {
@@ -31,12 +31,12 @@ public class Platform_Count : MonoBehaviour {
         {
             if (!counted)
             {
-                // TODO posible llamada a evento. evento ContarPlataforma
+                // TODO posible llamada a evento. evento ContarObstaculo
                 // TODO temporal
-                player.GetComponent<Player_Score>().IncreaseScore();
-                destructor.GetComponent<Destructor_Movement>().IncreaseSpeed();
+                player.GetComponent<Player_Score>().DecreaseScore();
+                destructor.GetComponent<Destructor_Movement>().DecreaseSpeed();
                 counted = true;
-            }           
+            }
         }
     }
     #endregion
