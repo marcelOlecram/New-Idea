@@ -11,12 +11,27 @@ public class Player_Score : MonoBehaviour {
     // private
     [SerializeField]
     private Text scorePlatformText;
-	#endregion
-	
-	#region Unity Methods
-	#endregion
-	
-	#region My Methods
+    // Master
+    private PlayerMaster playerMaster;
+    #endregion
+
+    #region Unity Methods
+    private void OnEnable()
+    {
+        SetInitialReferences();
+
+        playerMaster.EventIncreaseScore += IncreaseScore;
+        playerMaster.EventDecreaseScore += DecreaseScore;
+    }
+
+    private void OnDisable()
+    {
+        playerMaster.EventIncreaseScore -= IncreaseScore;
+        playerMaster.EventDecreaseScore -= DecreaseScore;
+    }
+    #endregion
+
+    #region My Methods
     public void IncreaseScore()
     {
         scorePlatform++;
@@ -32,6 +47,11 @@ public class Player_Score : MonoBehaviour {
     {
         scorePlatform--;
         UpdateUI();
+    }
+
+    private void SetInitialReferences()
+    {
+        playerMaster = GetComponent<PlayerMaster>();
     }
 	#endregion
 }

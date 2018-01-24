@@ -12,6 +12,8 @@ public class Obstacle_Count : MonoBehaviour {
     private string destructorTag = "Destructor";
     private GameObject player;
     private GameObject destructor;
+    // masters
+    private PlayerMaster playerMaster;
     #endregion
 
     #region Unity Methods
@@ -32,8 +34,9 @@ public class Obstacle_Count : MonoBehaviour {
             if (!counted)
             {
                 // TODO posible llamada a evento. evento ContarObstaculo
+                // TODO posible llamada a evento. evento DecrementarPuntaje
                 // TODO temporal
-                player.GetComponent<Player_Score>().DecreaseScore();
+                playerMaster.CallEventDecreaseScore();
                 destructor.GetComponent<Destructor_Movement>().DecreaseSpeed();
                 counted = true;
             }
@@ -46,6 +49,7 @@ public class Obstacle_Count : MonoBehaviour {
     {
         player = GameObject.FindGameObjectWithTag(playerTag);
         destructor = GameObject.FindGameObjectWithTag(destructorTag);
+        playerMaster = player.GetComponent<PlayerMaster>();
     }
     #endregion
 }

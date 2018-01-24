@@ -12,6 +12,8 @@ public class Platform_Count : MonoBehaviour {
     private string destructorTag = "Destructor";
     private GameObject player;
     private GameObject destructor;
+    // masters
+    private PlayerMaster playerMaster;
 	#endregion
 	
 	#region Unity Methods
@@ -32,8 +34,9 @@ public class Platform_Count : MonoBehaviour {
             if (!counted)
             {
                 // TODO posible llamada a evento. evento ContarPlataforma
+                // TODO posible llamada a evento. evento IncrementarPuntaje
                 // TODO temporal
-                player.GetComponent<Player_Score>().IncreaseScore();
+                playerMaster.CallEventIncreaseScore();
                 destructor.GetComponent<Destructor_Movement>().IncreaseSpeed();
                 counted = true;
             }           
@@ -46,6 +49,8 @@ public class Platform_Count : MonoBehaviour {
     {
         player = GameObject.FindGameObjectWithTag(playerTag);
         destructor = GameObject.FindGameObjectWithTag(destructorTag);
+
+        playerMaster = player.GetComponent<PlayerMaster>();
     }
     #endregion
 }

@@ -45,8 +45,8 @@ public class UI_ClosenessIndicator : MonoBehaviour {
     {
         distance = Vector3.Distance(player.position, destroyer.position);
         uiDistance = uiMaxDistance * (distance / maxDistance);
-        Debug.Log("Distance" + distance);
-        Debug.Log("UIDistance" + uiDistance);
+        //Debug.Log("Distance" + distance);
+        //Debug.Log("UIDistance" + uiDistance);
     }
 
     void SetInitialReferences()

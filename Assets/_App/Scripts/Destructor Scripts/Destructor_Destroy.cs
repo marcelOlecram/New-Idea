@@ -11,21 +11,32 @@ public class Destructor_Destroy : MonoBehaviour {
     private LayerMask layersToDestroyOnExit;
     [SerializeField]
     private LayerMask layersToDestroyOnEnter;
-    [SerializeField]
-    private GameObject GameOverUI;
+    // masters
+    private string playerTag = "Player";
+    private PlayerMaster playerMaster;
     #endregion
 
     #region Unity Methods
+    private void OnEnable()
+    {
+        SetInitialReferences();        
+    }
+
+    private void Start()
+    {
+        if(playerMaster == null)
+        {
+            SetInitialReferences();
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (layersToDestroyOnEnter == (layersToDestroyOnEnter | (1 << collision.gameObject.layer)))
         {
-            // Destroy
-            // TODO posible llamada a evento, event Destroy Player
-            Destroy(collision.gameObject);
-            // TODO posible llamada a evento, event GAME OVER
-            // TODO temporal hasta los delegados/eventos
-            GameOverUI.GetComponent<GameMaster_GameOver>().GameOver();
+            // Lose Life
+            playerMaster.CallEventLoseLife();
+            Debug.Log("SSSS");
         }
 
         if(layersToDestroyOnExit == (layersToDestroyOnExit | (1<< collision.gameObject.layer))){
@@ -48,6 +59,13 @@ public class Destructor_Destroy : MonoBehaviour {
             Destroy(collision.gameObject);
         }
         
+    }
+    #endregion
+
+    #region My Methods
+    private void SetInitialReferences()
+    {
+        playerMaster = GameObject.FindGameObjectWithTag(playerTag).GetComponent<PlayerMaster>();
     }
     #endregion
 }

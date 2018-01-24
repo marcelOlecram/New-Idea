@@ -13,13 +13,15 @@ public class Player_Movement : MonoBehaviour {
     // private
     private Rigidbody2D rB;
     private Transform myTransform;
+    // masters
+    private PlayerMaster playerMaster;
     #endregion
 
     #region Unity Methods
     // Use this for initialization
     void Start()
     {
-        SetInitialReferences();
+        SetInitialReferences();      
     }
 
     // Update is called once per frame
@@ -34,6 +36,7 @@ public class Player_Movement : MonoBehaviour {
     private void OnTriggerExit2D(Collider2D collision)
     {
         isJumping = true;
+        playerMaster.CallEventPlayerJump();
     }
 
     private void FixedUpdate()
@@ -85,6 +88,7 @@ public class Player_Movement : MonoBehaviour {
     {
         rB = GetComponent<Rigidbody2D>();
         myTransform = transform;
+        playerMaster = GetComponent<PlayerMaster>();
     }
     #endregion
 
