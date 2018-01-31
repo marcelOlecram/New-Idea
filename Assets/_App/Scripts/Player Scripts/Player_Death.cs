@@ -10,8 +10,10 @@ public class Player_Death : MonoBehaviour {
     public int lifes;
     // private
     [SerializeField]
-    private Text lifeText;    
+    private Text lifeText;
     // masters
+    private string gameMasterTag = "GameMaster";
+    private GameMaster gameMaster;
     private PlayerMaster playerMaster;
     #endregion
 
@@ -21,14 +23,12 @@ public class Player_Death : MonoBehaviour {
         SetInitialReferences();
         playerMaster.EventGainLife += IncreaseLife;
         playerMaster.EventLoseLife += DecreaseLife;
-        playerMaster.EventDestroyPlayer += DestroyPlayer;
     }
 
     private void OnDisable()
     {
         playerMaster.EventGainLife -= IncreaseLife;
         playerMaster.EventLoseLife -= DecreaseLife;
-        playerMaster.EventDestroyPlayer -= DestroyPlayer;
     }
 
     private void Start()
@@ -41,6 +41,7 @@ public class Player_Death : MonoBehaviour {
     private void SetInitialReferences()
     {
         playerMaster = GetComponent<PlayerMaster>();
+        gameMaster = GameObject.FindGameObjectWithTag(gameMasterTag).GetComponent<GameMaster>();
     }
 
     public void IncreaseLife()
@@ -56,7 +57,7 @@ public class Player_Death : MonoBehaviour {
         if (lifes <= 0)
         {
             // trigger gameover
-            playerMaster.CallEventDestroyPlayer();
+            gameMaster.CallEventGameOver();
         }
     }
 

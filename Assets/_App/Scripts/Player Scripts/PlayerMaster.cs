@@ -5,21 +5,29 @@ using UnityEngine;
 public class PlayerMaster : MonoBehaviour {
 
     #region Delegados
-    public delegate void GeneralEventHandler();
-    public event GeneralEventHandler EventDestroyPlayer;
-    public event GeneralEventHandler EventIncreaseScore;
-    public event GeneralEventHandler EventDecreaseScore;
-    public event GeneralEventHandler EventGainLife;
-    public event GeneralEventHandler EventLoseLife;    
-    public event GeneralEventHandler EventPlayerJump;       // manejar animaciones sonidos cada cuando se salte
+    public delegate void PlayerEventHandler();
+    public event PlayerEventHandler EventPlayerJumps;
+    public event PlayerEventHandler EventPlayerLands;
+    public event PlayerEventHandler EventIncreaseScore;
+    public event PlayerEventHandler EventDecreaseScore;
+    public event PlayerEventHandler EventGainLife;
+    public event PlayerEventHandler EventLoseLife;          // lose life by destructor    
     #endregion
-	
-	#region My Methods
-    public void CallEventDestroyPlayer()
+
+    #region My Methods
+    public void CallEventPlayerJumps()
     {
-        if (EventDestroyPlayer != null)
+        if (EventPlayerJumps != null)
         {
-            EventDestroyPlayer();
+            EventPlayerJumps();
+        }
+    }
+
+    public void CallEventPlayerLands()
+    {
+        if (EventPlayerLands != null)
+        {
+            EventPlayerLands();
         }
     }
 
@@ -52,14 +60,6 @@ public class PlayerMaster : MonoBehaviour {
         if (EventLoseLife != null)
         {
             EventLoseLife();
-        }
-    }
-
-    public void CallEventPlayerJump()
-    {
-        if (EventPlayerJump!=null)
-        {
-            EventPlayerJump();
         }
     }
     #endregion

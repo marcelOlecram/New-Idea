@@ -17,9 +17,24 @@ public class Platform_Drag : MonoBehaviour {
     private Vector3 offset;             // distancia desde donde se clickeo al centro del objeto
     [SerializeField]
     private Vector3 newGOCenter;        // posicion en donde se suelta el objeto
+
+    // masters
+    private PlatformMaster platformMaster;
     #endregion
 
     #region Unity Methods
+    private void OnEnable()
+    {
+        SetInitialReferences();
+        platformMaster.EventPlayerLandsPlatform += BlockPlatform;
+        platformMaster.EventPlayerLeavesPlatform += UnblockPlatform;
+    }
+
+    private void OnDisable()
+    {
+        platformMaster.EventPlayerLandsPlatform -= BlockPlatform;
+        platformMaster.EventPlayerLeavesPlatform -= UnblockPlatform;
+    }
     // llamado cuando se haga click en el objeto
     private void OnMouseDown()
     {
@@ -52,24 +67,13 @@ public class Platform_Drag : MonoBehaviour {
     {
         isDragged = false;
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag(playerTag))
-        {
-            BlockPlatform();
-        }
-    }
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag(playerTag))
-        {
-            UnblockPlatform();
-        }
-    }
     #endregion
 
     #region My Methods
+    private void SetInitialReferences()
+    {
+        platformMaster = GetComponent<PlatformMaster>();
+    }
     public void BlockPlatform()
     {
         canBeDragged = false;

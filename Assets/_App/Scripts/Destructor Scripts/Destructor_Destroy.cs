@@ -36,7 +36,6 @@ public class Destructor_Destroy : MonoBehaviour {
         {
             // Lose Life
             playerMaster.CallEventLoseLife();
-            Debug.Log("SSSS");
         }
 
         if(layersToDestroyOnExit == (layersToDestroyOnExit | (1<< collision.gameObject.layer))){
@@ -46,7 +45,10 @@ public class Destructor_Destroy : MonoBehaviour {
             {
                 collision.gameObject.GetComponent<Platform_SpriteChange>().ChangeToBlockedSprite();
             }
-            collision.gameObject.GetComponent<Platform_Drag>().BlockPlatform();
+            if (collision.gameObject.GetComponent<Platform_Drag>() != null)
+            {
+                collision.gameObject.GetComponent<Platform_Drag>().BlockPlatform();
+            }            
         }
     }
     private void OnTriggerExit2D(Collider2D collision)

@@ -5,7 +5,6 @@ using UnityEngine;
 public class Player_Reubicate : MonoBehaviour {
 
     #region Variables
-
     // public
     public float offset = 5f;
     // private

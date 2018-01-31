@@ -10,8 +10,8 @@ public class Destructor_GameOver : MonoBehaviour {
     [SerializeField]
     private LayerMask layersToDestroyOnEnter;
     // masters
-    private string playerTag= "Player";
-    private PlayerMaster playerMaster;
+    private string gameMasterTag = "GameMaster";
+    private GameMaster gameMaster;
     #endregion
 
     #region Unity Methods
@@ -21,7 +21,7 @@ public class Destructor_GameOver : MonoBehaviour {
     }
     // Use this for initialization
     private void Start () {
-		if(playerMaster == null)
+		if(gameMaster == null)
         {
             SetInitialReferences();
         }
@@ -32,7 +32,7 @@ public class Destructor_GameOver : MonoBehaviour {
         if (layersToDestroyOnEnter == (layersToDestroyOnEnter | (1 << collision.gameObject.layer)))
         {
             // Lose Life
-            playerMaster.CallEventDestroyPlayer();
+            gameMaster.CallEventGameOver();
         }
     }
     #endregion
@@ -40,7 +40,7 @@ public class Destructor_GameOver : MonoBehaviour {
     #region My Methods
     private void SetInitialReferences()
     {
-        playerMaster = GameObject.FindGameObjectWithTag(playerTag).GetComponent<PlayerMaster>();
+        gameMaster = GameObject.FindGameObjectWithTag(gameMasterTag).GetComponent<GameMaster>();
     }
 	#endregion
 }

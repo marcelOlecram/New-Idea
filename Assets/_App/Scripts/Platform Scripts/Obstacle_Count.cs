@@ -13,43 +13,45 @@ public class Obstacle_Count : MonoBehaviour {
     private GameObject player;
     private GameObject destructor;
     // masters
+    private PlatformMaster platformMaster;
     private PlayerMaster playerMaster;
     #endregion
 
     #region Unity Methods
-    // Use this for initialization
-    private void Start () {
-        SetInitialReferences();
-    }
-	
-	// Update is called once per frame
-	private void Update () {
-		
-	}
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnEnable()
     {
-        if (collision.gameObject.CompareTag(playerTag))
-        {
-            if (!counted)
-            {
-                // TODO posible llamada a evento. evento ContarObstaculo
-                // TODO posible llamada a evento. evento DecrementarPuntaje
-                // TODO temporal
-                playerMaster.CallEventDecreaseScore();
-                destructor.GetComponent<Destructor_Movement>().DecreaseSpeed();
-                counted = true;
-            }
-        }
+        SetInitialReferences();
+        platformMaster.EventPlayerLandsObstacle += CountObstacle;
+    }
+
+    private void OnDisable()
+    {
+        platformMaster.EventPlayerLandsObstacle -= CountObstacle;
     }
     #endregion
 
     #region My Methods
     void SetInitialReferences()
     {
+        platformMaster = GetComponent<PlatformMaster>();
+
         player = GameObject.FindGameObjectWithTag(playerTag);
         destructor = GameObject.FindGameObjectWithTag(destructorTag);
         playerMaster = player.GetComponent<PlayerMaster>();
+    }
+
+    // Cuenta el obstaculo si no lo fue hecho
+    private void CountObstacle()
+    {
+        if (!counted)
+        {
+            counted = true;
+            // jugador
+            playerMaster.CallEventDecreaseScore();
+            // destructor
+            destructor.GetComponent<Destructor_Movement>().DecreaseSpeed();
+            
+        }
     }
     #endregion
 }

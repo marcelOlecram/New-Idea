@@ -13,34 +13,21 @@ public class Platform_Count : MonoBehaviour {
     private GameObject player;
     private GameObject destructor;
     // masters
+    private PlatformMaster platformMaster;
     private PlayerMaster playerMaster;
-	#endregion
-	
-	#region Unity Methods
-	// Use this for initialization
-	private void Start () {
-        SetInitialReferences();
-	}
-	
-	// Update is called once per frame
-	private void Update () {
-		
-	}
+    #endregion
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    #region Unity Methods
+    // Use this for initialization
+    private void OnEnable()
     {
-        if (collision.gameObject.CompareTag(playerTag))
-        {
-            if (!counted)
-            {
-                // TODO posible llamada a evento. evento ContarPlataforma
-                // TODO posible llamada a evento. evento IncrementarPuntaje
-                // TODO temporal
-                playerMaster.CallEventIncreaseScore();
-                destructor.GetComponent<Destructor_Movement>().IncreaseSpeed();
-                counted = true;
-            }           
-        }
+        SetInitialReferences();
+        platformMaster.EventPlayerLandsPlatform += CountPlatform;
+    }
+
+    private void OnDisable()
+    {
+        platformMaster.EventPlayerLandsPlatform -= CountPlatform;
     }
     #endregion
 
@@ -51,6 +38,21 @@ public class Platform_Count : MonoBehaviour {
         destructor = GameObject.FindGameObjectWithTag(destructorTag);
 
         playerMaster = player.GetComponent<PlayerMaster>();
+
+        platformMaster = GetComponent<PlatformMaster>();
+    }
+
+    // Cuenta la plataforma si es que no fue contada, aplica acciones correspondientes con el Player y el Destructor
+    private void CountPlatform()
+    {
+        if (!counted)
+        {
+            counted = true;
+            // jugador
+            playerMaster.CallEventIncreaseScore();
+            // destructor
+            destructor.GetComponent<Destructor_Movement>().IncreaseSpeed();
+        }
     }
     #endregion
 }

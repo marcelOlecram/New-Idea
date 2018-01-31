@@ -10,13 +10,23 @@ public class Platform_SpriteChange : MonoBehaviour {
     public Sprite blockedSprite;
     // private
     private SpriteRenderer spriteRenderer;
-	#endregion
-	
-	#region Unity Methods
-	// Use this for initialization
-	private void Start () {
+    // masters
+    private PlatformMaster platformMaster;
+    #endregion
+
+    #region Unity Methods
+    private void OnEnable()
+    {
         SetInitialReferences();
-	}
+        platformMaster.EventPlayerLandsPlatform += ChangeToBlockedSprite;
+        platformMaster.EventPlayerLeavesPlatform += ChangeToDragableSprite;
+    }
+
+    private void OnDisable()
+    {
+        platformMaster.EventPlayerLandsPlatform -= ChangeToBlockedSprite;
+        platformMaster.EventPlayerLeavesPlatform -= ChangeToDragableSprite;
+    }
 
 	#endregion
 	
@@ -25,6 +35,8 @@ public class Platform_SpriteChange : MonoBehaviour {
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         ChangeToDragableSprite();
+
+        platformMaster = GetComponent<PlatformMaster>();
     }
 
     public void ChangeToBlockedSprite()

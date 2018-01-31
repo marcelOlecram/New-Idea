@@ -32,11 +32,12 @@ public class Player_Movement : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         isJumping = false;
+        playerMaster.CallEventPlayerLands();
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         isJumping = true;
-        playerMaster.CallEventPlayerJump();
+        playerMaster.CallEventPlayerJumps();
     }
 
     private void FixedUpdate()
@@ -56,7 +57,7 @@ public class Player_Movement : MonoBehaviour {
         {
             rB.velocity += Vector2.up * Physics2D.gravity.y * (gravityJumpMultiplier - 1f) * Time.deltaTime;
         }
-
+        // salto
         if (Input.GetKeyDown(KeyCode.W) && !isJumping)
         {
             rB.velocity = Vector2.up * jumpForce;
@@ -65,6 +66,7 @@ public class Player_Movement : MonoBehaviour {
         {
 
         }
+        // movimiento
         if (Input.GetKey(KeyCode.A))
         {
             rB.velocity = new Vector2(-movementSpeed, rB.velocity.y);

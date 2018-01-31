@@ -9,8 +9,7 @@ public class GameMaster_GameOver : MonoBehaviour {
     public GameObject GameOverUI;
     // private
     // masters
-    private string playerTag = "Player";
-    private PlayerMaster playerMaster;
+    private GameMaster gameMaster;
     #endregion
 
     #region Unity Methods
@@ -18,12 +17,12 @@ public class GameMaster_GameOver : MonoBehaviour {
     private void OnEnable()
     {
         SetInitialReferences();
-        playerMaster.EventDestroyPlayer += GameOver;
+        gameMaster.EventGameOver += GameOver;
     }
 
     private void OnDisable()
     {
-        playerMaster.EventDestroyPlayer -= GameOver;
+        gameMaster.EventGameOver -= GameOver;
     }
 	#endregion
 	
@@ -38,7 +37,7 @@ public class GameMaster_GameOver : MonoBehaviour {
 
     private void SetInitialReferences()
     {
-        playerMaster = GameObject.FindGameObjectWithTag(playerTag).GetComponent<PlayerMaster>();
+        gameMaster = GetComponent<GameMaster>();        
     }
 	#endregion
 }
