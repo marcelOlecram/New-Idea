@@ -69,5 +69,12 @@ public class Player_Death : MonoBehaviour {
     {
         lifeText.text = "V: " + lifes;
     }
+
+    // TODO unir al evento StartGame
+    private void ResetLife()
+    {
+        lifes = 0;
+        UpdateUI();
+    }
 	#endregion
 }

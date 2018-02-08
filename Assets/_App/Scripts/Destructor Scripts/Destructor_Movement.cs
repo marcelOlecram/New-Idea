@@ -16,13 +16,24 @@ public class Destructor_Movement : MonoBehaviour {
     private Vector3 direction;
     [SerializeField]
     private Transform playerTransform;
+    // masters
+    private DestructorMaster destructorMaster;
     #endregion
 
     #region Unity Methods
     // Use this for initialization
-    private void Start () {
+    private void OnEnable()
+    {
         SetInitialReferences();
-	}
+        destructorMaster.EventIncreaseSpeed += IncreaseSpeed;
+        destructorMaster.EventDecreaseSpeed += DecreaseSpeed;
+    }
+
+    private void OnDisable()
+    {
+        destructorMaster.EventIncreaseSpeed -= IncreaseSpeed;
+        destructorMaster.EventDecreaseSpeed -= DecreaseSpeed;
+    }
 	
 	// Update is called once per frame
 	private void Update () {
@@ -36,11 +47,12 @@ public class Destructor_Movement : MonoBehaviour {
     #endregion
 
     #region My Methods
-    void SetInitialReferences()
+    private void SetInitialReferences()
     {
         myTransform = transform;
+        destructorMaster = GetComponent<DestructorMaster>();
     }
-    void Move()
+    private void Move()
     {
         myTransform.position += direction * speed * Time.deltaTime;
     }

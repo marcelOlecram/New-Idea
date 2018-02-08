@@ -28,12 +28,18 @@ public class Platform_Drag : MonoBehaviour {
         SetInitialReferences();
         platformMaster.EventPlayerLandsPlatform += BlockPlatform;
         platformMaster.EventPlayerLeavesPlatform += UnblockPlatform;
+
+        platformMaster.EventBlockPlatform += BlockPlatform;
+        platformMaster.EventUnblockPlatform += UnblockPlatform;
     }
 
     private void OnDisable()
     {
         platformMaster.EventPlayerLandsPlatform -= BlockPlatform;
         platformMaster.EventPlayerLeavesPlatform -= UnblockPlatform;
+
+        platformMaster.EventBlockPlatform -= BlockPlatform;
+        platformMaster.EventUnblockPlatform -= UnblockPlatform;
     }
     // llamado cuando se haga click en el objeto
     private void OnMouseDown()

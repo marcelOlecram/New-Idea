@@ -53,5 +53,12 @@ public class Player_Score : MonoBehaviour {
     {
         playerMaster = GetComponent<PlayerMaster>();
     }
+
+    // TODO unir al evento StartGame
+    private void ResetScore()
+    {
+        scorePlatform = 0;
+        UpdateUI();
+    }
 	#endregion
 }

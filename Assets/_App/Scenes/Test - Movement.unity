@@ -222,7 +222,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 116593326}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1683408232}
+        m_MethodName: CallEventGoToMainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &116593326
@@ -4077,6 +4088,7 @@ GameObject:
   m_Component:
   - component: {fileID: 467066714}
   - component: {fileID: 467066713}
+  - component: {fileID: 467066716}
   - component: {fileID: 467066712}
   - component: {fileID: 467066715}
   m_Layer: 0
@@ -4158,6 +4170,17 @@ MonoBehaviour:
   deacceleration: 0
   direction: {x: 1, y: 0, z: 0}
   playerTransform: {fileID: 1583369580}
+--- !u!114 &467066716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 467066711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af2fa0eabea209b44842e849f1cb0242, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &470464517
 GameObject:
   m_ObjectHideFlags: 0
@@ -5017,7 +5040,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1484546520}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1683408232}
+        m_MethodName: CallEventContinueGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1484546520
@@ -5372,12 +5406,14 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1683408230}
-  - component: {fileID: 1683408229}
   - component: {fileID: 1683408232}
+  - component: {fileID: 1683408229}
   - component: {fileID: 1683408233}
   - component: {fileID: 1683408231}
   - component: {fileID: 1683408234}
   - component: {fileID: 1683408235}
+  - component: {fileID: 1683408236}
+  - component: {fileID: 1683408237}
   m_Layer: 0
   m_Name: GameMaster
   m_TagString: GameMaster
@@ -5470,6 +5506,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMovementScript: {fileID: 1583369582}
+--- !u!114 &1683408236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1683408228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 295892638727d0242a57c53d95395db9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1683408237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1683408228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88d26bd38295e40458c10de042347072, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1693281373
 GameObject:
   m_ObjectHideFlags: 0
@@ -5545,7 +5603,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1693281376}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1683408232}
+        m_MethodName: CallEventRestartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1693281376
@@ -6093,7 +6162,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2013735213}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1683408232}
+        m_MethodName: CallEventGoToMainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &2013735213

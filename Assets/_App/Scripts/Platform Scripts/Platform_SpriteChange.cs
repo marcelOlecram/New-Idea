@@ -20,12 +20,18 @@ public class Platform_SpriteChange : MonoBehaviour {
         SetInitialReferences();
         platformMaster.EventPlayerLandsPlatform += ChangeToBlockedSprite;
         platformMaster.EventPlayerLeavesPlatform += ChangeToDragableSprite;
+
+        platformMaster.EventBlockPlatform += ChangeToBlockedSprite;
+        platformMaster.EventUnblockPlatform += ChangeToDragableSprite;
     }
 
     private void OnDisable()
     {
         platformMaster.EventPlayerLandsPlatform -= ChangeToBlockedSprite;
         platformMaster.EventPlayerLeavesPlatform -= ChangeToDragableSprite;
+
+        platformMaster.EventBlockPlatform -= ChangeToBlockedSprite;
+        platformMaster.EventUnblockPlatform -= ChangeToDragableSprite;
     }
 
 	#endregion

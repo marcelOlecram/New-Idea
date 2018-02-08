@@ -19,12 +19,16 @@ public class GameMaster_PauseGame : MonoBehaviour {
         SetInitialReferences();
         gameMaster.EventPauseGame += PauseGame;
         gameMaster.EventContinueGame += ContinueGame;
+
+        gameMaster.EventStartGame += ContinueGame;
     }
 
     private void OnDisable()
     {
         gameMaster.EventPauseGame -= PauseGame;
         gameMaster.EventContinueGame -= ContinueGame;
+
+        gameMaster.EventStartGame -= ContinueGame;
     }
 
     private void Update()

@@ -10,6 +10,10 @@ public class PlatformMaster : MonoBehaviour {
     public event PlatformEventHandler EventPlayerLandsObstacle;
     public event PlatformEventHandler EventPlayerLeavesPlatform;
     public event PlatformEventHandler EventPlatformDestroy;
+    // eventos similares a Player Lands/Leaves Platform/Obstacle, salvo que no "contaran" el puntaje
+    public event PlatformEventHandler EventBlockPlatform;
+    public event PlatformEventHandler EventUnblockPlatform;
+
     #endregion
 
 
@@ -43,6 +47,22 @@ public class PlatformMaster : MonoBehaviour {
         if (EventPlatformDestroy != null)
         {
             EventPlatformDestroy();
+        }
+    }
+
+    public void CallEventBlockPlatform()
+    {
+        if (EventBlockPlatform != null)
+        {
+            EventBlockPlatform();
+        }
+    }
+
+    public void CallEventUnblockPlatform()
+    {
+        if (EventUnblockPlatform != null)
+        {
+            EventUnblockPlatform();
         }
     }
     #endregion

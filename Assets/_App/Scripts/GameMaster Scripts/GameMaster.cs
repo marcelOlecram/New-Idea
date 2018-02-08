@@ -6,6 +6,7 @@ public class GameMaster : MonoBehaviour {
 
     #region Delegados
     public delegate void GameEventHandler();
+    public event GameEventHandler EventStartGame;           // used to ensure time flow, score, etc.
     public event GameEventHandler EventPauseGame;
     public event GameEventHandler EventContinueGame;
     public event GameEventHandler EventRestartGame;
@@ -19,6 +20,14 @@ public class GameMaster : MonoBehaviour {
     #endregion
 
     #region My Methods
+    public void CallEventStartGame()
+    {
+        if(EventStartGame != null)
+        {
+            EventStartGame();
+        }
+    }
+
     public void CallEventPauseGame()
     {
         if (EventPauseGame != null)

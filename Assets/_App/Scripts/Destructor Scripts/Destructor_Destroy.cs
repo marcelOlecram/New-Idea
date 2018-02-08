@@ -39,16 +39,7 @@ public class Destructor_Destroy : MonoBehaviour {
         }
 
         if(layersToDestroyOnExit == (layersToDestroyOnExit | (1<< collision.gameObject.layer))){
-            // TODO posible llamada a evento. event BlockPlatform
-            // TODO temporal
-            if(collision.gameObject.GetComponent<Platform_SpriteChange>() != null)
-            {
-                collision.gameObject.GetComponent<Platform_SpriteChange>().ChangeToBlockedSprite();
-            }
-            if (collision.gameObject.GetComponent<Platform_Drag>() != null)
-            {
-                collision.gameObject.GetComponent<Platform_Drag>().BlockPlatform();
-            }            
+            collision.gameObject.GetComponent<PlatformMaster>().CallEventBlockPlatform();       
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -57,7 +48,6 @@ public class Destructor_Destroy : MonoBehaviour {
         if(layersToDestroyOnExit == (layersToDestroyOnExit | (1 << collision.gameObject.layer)))
         {
             // Destroy
-            // TODO posible llamada a evento, event Destroy Platform
             Destroy(collision.gameObject);
         }
         

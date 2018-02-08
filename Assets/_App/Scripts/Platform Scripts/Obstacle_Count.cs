@@ -15,6 +15,7 @@ public class Obstacle_Count : MonoBehaviour {
     // masters
     private PlatformMaster platformMaster;
     private PlayerMaster playerMaster;
+    private DestructorMaster destructorMaster;
     #endregion
 
     #region Unity Methods
@@ -37,7 +38,9 @@ public class Obstacle_Count : MonoBehaviour {
 
         player = GameObject.FindGameObjectWithTag(playerTag);
         destructor = GameObject.FindGameObjectWithTag(destructorTag);
+
         playerMaster = player.GetComponent<PlayerMaster>();
+        destructorMaster = destructor.GetComponent<DestructorMaster>();
     }
 
     // Cuenta el obstaculo si no lo fue hecho
@@ -49,8 +52,7 @@ public class Obstacle_Count : MonoBehaviour {
             // jugador
             playerMaster.CallEventDecreaseScore();
             // destructor
-            destructor.GetComponent<Destructor_Movement>().DecreaseSpeed();
-            
+            destructorMaster.CallEventDecreaseSpeed();            
         }
     }
     #endregion

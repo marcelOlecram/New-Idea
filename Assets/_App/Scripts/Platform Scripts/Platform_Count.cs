@@ -15,6 +15,7 @@ public class Platform_Count : MonoBehaviour {
     // masters
     private PlatformMaster platformMaster;
     private PlayerMaster playerMaster;
+    private DestructorMaster destructorMaster;
     #endregion
 
     #region Unity Methods
@@ -40,6 +41,8 @@ public class Platform_Count : MonoBehaviour {
         playerMaster = player.GetComponent<PlayerMaster>();
 
         platformMaster = GetComponent<PlatformMaster>();
+
+        destructorMaster = destructor.GetComponent<DestructorMaster>();
     }
 
     // Cuenta la plataforma si es que no fue contada, aplica acciones correspondientes con el Player y el Destructor
@@ -51,7 +54,7 @@ public class Platform_Count : MonoBehaviour {
             // jugador
             playerMaster.CallEventIncreaseScore();
             // destructor
-            destructor.GetComponent<Destructor_Movement>().IncreaseSpeed();
+            destructorMaster.CallEventIncreaseSpeed();
         }
     }
     #endregion
