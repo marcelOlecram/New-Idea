@@ -12,7 +12,11 @@ public class Player_Movement : MonoBehaviour {
     public bool isJumping = false;
     // private
     private Rigidbody2D rB;
-    private Transform myTransform;
+    //private Transform myTransform;
+    private bool jumpRequest = false;
+    private bool movementRightRequest = false;
+    private bool movementLeftRequest = false;
+    private bool stopRequest = false;
     // masters
     private PlayerMaster playerMaster;
     #endregion
@@ -26,7 +30,9 @@ public class Player_Movement : MonoBehaviour {
 
     // Update is called once per frame
     void Update()
-    {        
+    {
+        CheckJumpInput();
+        CheckMovementInput();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -42,54 +48,83 @@ public class Player_Movement : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        CheckMovementInput();
+        Move();
+        Jump();
+        if (jumpRequest)
+        {
+            jumpRequest = false;
+            rB.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        }
     }
     #endregion
 
     #region My Methods
-    void CheckMovementInput()
+    private void CheckJumpInput()
     {
-        // efecto de salto
+        if(!isJumping && (Input.GetKeyDown(KeyCode.W)|| Input.GetKeyDown(KeyCode.Space)))
+        {
+            jumpRequest = true;
+        }
+    }
+
+    // Calcular los efectos de saltos en fisicas
+    private void Jump()
+    {
         if(rB.velocity.y < 0f)
         {
-            rB.velocity += Vector2.up * Physics2D.gravity.y * (gravityFallMultiplier - 1f) * Time.deltaTime;
-        }else if(rB.velocity.y >0f && !Input.GetKey(KeyCode.W))
+            rB.gravityScale = gravityFallMultiplier;
+        }else if(rB.velocity.y > 0f)
         {
-            rB.velocity += Vector2.up * Physics2D.gravity.y * (gravityJumpMultiplier - 1f) * Time.deltaTime;
+            rB.gravityScale = gravityFallMultiplier;
+        }else
+        {
+            rB.gravityScale = 1f;
         }
-        // salto
-        if (Input.GetKeyDown(KeyCode.W) && !isJumping)
-        {
-            rB.velocity = Vector2.up * jumpForce;
+    }
+    // realizar los movimientos en fisicas
+    private void Move()
+    {
+        // movimient a la izquierda
+        if (movementLeftRequest)
+        {             
+            rB.velocity = new Vector2(-movementSpeed, rB.velocity.y);            
         }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-
-        }
-        // movimiento
-        if (Input.GetKey(KeyCode.A))
-        {
-            rB.velocity = new Vector2(-movementSpeed, rB.velocity.y);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
+        // movimiento a la derecha
+        if (movementRightRequest)
+        {            
             rB.velocity = new Vector2(movementSpeed, rB.velocity.y);
         }
-        // soltar teclas de avance
-        if (Input.GetKeyUp(KeyCode.A))
+        // stop
+        if (stopRequest)
         {
-            rB.velocity = new Vector2(0f, rB.velocity.y);
-        }
-        if (Input.GetKeyUp(KeyCode.D))
-        {
+            stopRequest = false;
             rB.velocity = new Vector2(0f, rB.velocity.y);
         }
     }
 
-    void SetInitialReferences()
+    private void CheckMovementInput()
+    {
+        // movimiento
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            movementLeftRequest = true;
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            movementRightRequest = true;
+        }
+        // detener movimiento
+        if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
+        {
+            movementLeftRequest = false;
+            stopRequest = true;
+        }
+    }
+
+    private void SetInitialReferences()
     {
         rB = GetComponent<Rigidbody2D>();
-        myTransform = transform;
+        //myTransform = transform;
         playerMaster = GetComponent<PlayerMaster>();
     }
     #endregion

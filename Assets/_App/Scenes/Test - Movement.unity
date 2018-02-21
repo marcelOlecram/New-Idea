@@ -5146,9 +5146,9 @@ GameObject:
   - component: {fileID: 1583369578}
   - component: {fileID: 1583369581}
   - component: {fileID: 1583369583}
+  - component: {fileID: 1583369586}
   - component: {fileID: 1583369582}
   - component: {fileID: 1583369584}
-  - component: {fileID: 1583369586}
   - component: {fileID: 1583369585}
   - component: {fileID: 1583369587}
   m_Layer: 8
@@ -5273,8 +5273,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpForce: 15
   movementSpeed: 10
-  gravityJumpMultiplier: 2.5
-  gravityFallMultiplier: 2
+  gravityJumpMultiplier: 2
+  gravityFallMultiplier: 2.5
   isJumping: 0
 --- !u!58 &1583369583
 CircleCollider2D:
